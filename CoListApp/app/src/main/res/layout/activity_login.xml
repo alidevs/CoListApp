@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/bone"
+	tools:context=".activities.LoginActivity">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginStart="10dp"
+		android:layout_marginTop="10dp"
+		android:layout_marginEnd="10dp"
+		android:layout_marginBottom="10dp"
+		android:background="@drawable/authentication_card"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<TextView
+			android:id="@+id/textView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="30dp"
+			android:layout_marginTop="30dp"
+			android:fontFamily="@font/gilroy_black"
+			android:text="Login"
+			android:textColor="@color/casal"
+			android:textSize="24sp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<ImageView
+			android:id="@+id/imageView"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_marginTop="30dp"
+			android:layout_marginEnd="30dp"
+			android:adjustViewBounds="true"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			android:src="@drawable/colist_logo"/>
+
+		<ImageView
+			android:id="@+id/imageView3"
+			android:layout_width="165dp"
+			android:layout_height="175dp"
+			android:layout_marginTop="24dp"
+			android:src="@drawable/auth_plant"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/registerEmailTextField"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="30dp"
+			android:layout_marginTop="20dp"
+			android:layout_marginEnd="30dp"
+			android:hint="Email Address"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/imageView3"
+			app:endIconMode="custom"
+			app:endIconDrawable="@drawable/ic_email_icon"
+			style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+			<com.google.android.material.textfield.TextInputEditText
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="14sp" />
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/registerPasswordTextField"
+			app:endIconMode="custom"
+			app:endIconDrawable="@drawable/ic_password_icon"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="30dp"
+			android:layout_marginTop="20dp"
+			android:layout_marginEnd="30dp"
+			android:hint="Password"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/registerEmailTextField"
+			style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+			<com.google.android.material.textfield.TextInputEditText
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:inputType="textPassword"
+				android:textSize="14sp" />
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<Button
+			android:id="@+id/registerRegisterButton"
+			style="@style/Widget.MaterialComponents.Button.TextButton"
+			android:layout_width="0dp"
+			android:layout_height="42dp"
+			android:layout_marginStart="30dp"
+			android:layout_marginTop="30dp"
+			android:layout_marginEnd="30dp"
+			android:onClick="loginButtonPressed"
+			android:text="Login"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/registerPasswordTextField" />
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="390dp"
+			android:layout_height="80dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent">
+
+			<com.google.android.material.progressindicator.LinearProgressIndicator
+				android:id="@+id/linearProgressBar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				android:indeterminate="true"
+				app:indeterminateAnimationType="disjoint"
+				android:visibility="invisible"
+				/>
+
+			<View
+				android:id="@+id/view"
+				android:layout_width="wrap_content"
+				android:layout_height="0.75dp"
+				android:background="@color/bone"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/linearProgressBar"
+				 />
+
+			<TextView
+				android:id="@+id/textView2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:text="Don't have an account?"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/view" />
+
+			<Button
+				android:id="@+id/registerGoToLoginButton"
+				style="@style/Widget.MaterialComponents.Button.TextButton"
+				android:layout_width="0dp"
+				android:layout_height="42dp"
+				android:layout_marginStart="30dp"
+				android:layout_marginEnd="30dp"
+				android:onClick="registerButtonPressed"
+				android:text="Register"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
