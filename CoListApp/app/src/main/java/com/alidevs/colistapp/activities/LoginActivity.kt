@@ -1,15 +1,14 @@
 package com.alidevs.colistapp.activities
 
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.alidevs.colistapp.databinding.ActivityLoginBinding
-import com.alidevs.colistapp.models.User
-import com.alidevs.colistapp.utils.ApiViewModel
+import com.alidevs.colistapp.models.UserModel
+import com.alidevs.colistapp.utils.AuthenticationViewModel
 
 class LoginActivity : AppCompatActivity() {
 
@@ -32,14 +31,14 @@ class LoginActivity : AppCompatActivity() {
 		// Variables
 		val emailAddress = emailAddressEditText.text.toString()
 		val password = passwordEditText.text.toString()
-		val user = User(emailAddress, password)
+		val user = UserModel(emailAddress, password)
 
 		// API
-		val authenticatedUser = ApiViewModel.userLogin(user)
+		val authenticatedUser = AuthenticationViewModel.userLogin(user)
 		authenticatedUser.observe(this, {
 			Log.d("Retrofit LoginActivity", "Got $it")
 			Toast.makeText(this, "Welcome back, ${it.fullname}", Toast.LENGTH_SHORT).show()
-			segueTo(MainActivity::class.java)
+			segueTo(HomeActivity::class.java)
 		})
 	}
 

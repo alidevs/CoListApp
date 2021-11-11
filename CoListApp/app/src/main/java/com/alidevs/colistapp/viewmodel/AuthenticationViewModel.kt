@@ -1,47 +1,38 @@
 package com.alidevs.colistapp.utils
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.alidevs.colistapp.interfaces.ApiEndpoints
-import com.alidevs.colistapp.models.User
+import com.alidevs.colistapp.api.ApiEndpoints
+import com.alidevs.colistapp.models.UserModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
-class ApiViewModel : ViewModel() {
-	val apiEndpoints: ApiEndpoints
+class AuthenticationViewModel : ViewModel() {
 
 	companion object {
-		var instance: ApiViewModel? = ApiViewModel()
+		fun userRegister(user: UserModel) =
+			handleUserAuthentication(user, ApiCallType.Register)
 
-		fun userRegister(user: User): LiveData<User> {
-			Log.d("ApiClient", user.toString())
-			return handleUserAuthentication(user, ApiCallType.Register)
-		}
-
-		fun userLogin(user: User): LiveData<User> {
-			return handleUserAuthentication(user, ApiCallType.Login)
-		}
+		fun userLogin(user: UserModel) =
+			handleUserAuthentication(user, ApiCallType.Login)
 
 		private fun handleUserAuthentication(
-			user: User,
+			user: UserModel,
 			apiCallType: ApiCallType,
-		): MutableLiveData<User> {
-			val liveData = MutableLiveData<User>()
-			val apiEndpoints = instance!!.apiEndpoints
+		): MutableLiveData<UserModel> {
+			val liveData = MutableLiveData<UserModel>()
+			val apiEndpoints = ApiEndpoints.getInstance()
 
 			val call = when (apiCallType) {
 				ApiCallType.Login -> apiEndpoints.userLogin(user)
 				else -> apiEndpoints.userRegister(user)
 			}
 
-			call.enqueue(object : Callback<User> {
-				override fun onResponse(call: Call<User>, response: Response<User>) {
+			call.enqueue(object : Callback<UserModel> {
+				override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
 					if (response.isSuccessful) {
 						Log.d("Retrofit response body", response.body().toString())
 						saveUserInfo(response)
@@ -51,7 +42,7 @@ class ApiViewModel : ViewModel() {
 					}
 				}
 
-				override fun onFailure(call: Call<User>, t: Throwable) {
+				override fun onFailure(call: Call<UserModel>, t: Throwable) {
 					t.message?.let { Log.d("Retrofit error", it) }
 					t.printStackTrace()
 				}
@@ -60,7 +51,7 @@ class ApiViewModel : ViewModel() {
 			return liveData
 		}
 
-		fun saveUserInfo(response: Response<User>) {
+		fun saveUserInfo(response: Response<UserModel>) {
 			val editor = Globals.sharedPreferences.edit()
 			val token = response.headers().get("x-auth")
 			val name = response.body()!!.fullname
@@ -77,13 +68,6 @@ class ApiViewModel : ViewModel() {
 		}
 	}
 
-	init {
-		val retrofit = Retrofit.Builder()
-			.baseUrl(ApiEndpoints.BASE_URL)
-			.addConverterFactory(GsonConverterFactory.create())
-			.build()
-		apiEndpoints = retrofit.create(ApiEndpoints::class.java)
-	}
 }
 
 enum class ApiCallType {

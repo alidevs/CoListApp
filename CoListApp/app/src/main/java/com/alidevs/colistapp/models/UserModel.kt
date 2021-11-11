@@ -2,7 +2,7 @@ package com.alidevs.colistapp.models
 
 import com.google.gson.annotations.SerializedName
 
-data class User(
+data class UserModel(
 	@SerializedName("_id")
 	var id: String?,
 

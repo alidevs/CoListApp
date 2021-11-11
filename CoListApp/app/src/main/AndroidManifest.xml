@@ -28,7 +28,7 @@
 			android:name=".activities.RegisterActivity"
 			android:exported="true" />
 		<activity
-			android:name=".activities.MainActivity"
+			android:name=".activities.HomeActivity"
 			android:exported="true" />
 	</application>
 

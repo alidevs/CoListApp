@@ -22,24 +22,31 @@ class SplashActivity : AppCompatActivity() {
 		setContentView(binding.root)
 
 		Globals.sharedPreferences = getSharedPreferences("CoList", Context.MODE_PRIVATE)
-		Globals.sharedPreferences.edit().clear().apply() // TEMPORARY
+
+		// TODO: Remove this button
+		binding.tempLogoutButton.setOnClickListener {
+			Globals.sharedPreferences.edit().clear().apply()
+			finish()
+			startActivity(Intent(this, this::class.java))
+		}
 
 		if (Globals.sharedPreferences.getBoolean("first_timer", true)) {
 			// TODO: Move the segue to login here
-			Toast.makeText(this, "This is your first time using the app, welcome!", Toast.LENGTH_SHORT).show()
+			Toast.makeText(this, "This is your first time using the app, welcome :)", Toast.LENGTH_SHORT).show()
 			Log.d("Comments", "First time")
 
 			Globals.sharedPreferences.edit().putBoolean("first_timer", false).apply()
 		}
 
 		Handler(Looper.getMainLooper()).postDelayed({
-			var intent = Intent(this, MainActivity::class.java)
+			var intent = Intent(this, HomeActivity::class.java)
 			if (Globals.sharedPreferences.getString("Email", null) == null) {
 				intent = Intent(this, LoginActivity::class.java)
 			}
+			Toast.makeText(this, "Welcome back, ${Globals.sharedPreferences.getString("Fullname", "N/A")}", Toast.LENGTH_SHORT).show()
 			startActivity(intent)
 			finish()
-		}, 500)
+		}, 1500)
 
 	}
 }

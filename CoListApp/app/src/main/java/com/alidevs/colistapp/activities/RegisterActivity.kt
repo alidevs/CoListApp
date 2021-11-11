@@ -6,8 +6,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alidevs.colistapp.databinding.ActivityRegisterBinding
-import com.alidevs.colistapp.models.User
-import com.alidevs.colistapp.utils.ApiViewModel
+import com.alidevs.colistapp.models.UserModel
+import com.alidevs.colistapp.utils.AuthenticationViewModel
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -32,13 +32,13 @@ class RegisterActivity : AppCompatActivity() {
 		val fullname = fullNameEditText.text.toString()
 		val emailAddress = emailAddressEditText.text.toString()
 		val password = passwordEditText.text.toString()
-		val user = User(fullname, emailAddress, password)
+		val user = UserModel(fullname, emailAddress, password)
 
 		// API
-		val authenticatedUser = ApiViewModel.userRegister(user)
+		val authenticatedUser = AuthenticationViewModel.userRegister(user)
 		authenticatedUser.observe(this, {
 			Toast.makeText(this, "Welcome to CoList, ${it.fullname}", Toast.LENGTH_SHORT).show()
-			segueTo(MainActivity::class.java)
+			segueTo(HomeActivity::class.java)
 		})
 	}
 
