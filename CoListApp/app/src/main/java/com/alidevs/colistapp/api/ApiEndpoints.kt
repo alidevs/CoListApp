@@ -11,11 +11,9 @@ import retrofit2.http.*
 interface ApiEndpoints {
 	companion object {
 		const val BASE_URL = "http://10.0.2.2:3000"
-
 		var retrofitService: ApiEndpoints? = null
 
 		fun getInstance() : ApiEndpoints {
-
 			if (retrofitService == null) {
 				val retrofit = Retrofit.Builder()
 					.baseUrl(BASE_URL)
@@ -39,6 +37,9 @@ interface ApiEndpoints {
 
 	// List interaction routes
 	@GET("/lists")
-	fun getUserLists(@Header("x-auth") xAuthHeader: String) : Call<List<ListModel>>
+	fun getLists(@Header("x-auth") xAuthHeader: String) : Call<List<ListModel>>
+
+	@POST("/lists")
+	fun createList(@Header("x-auth") xAuthHeader: String, @Body listModel: ListModel) : Call<ListModel>
 
 }

@@ -1,75 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="@color/soapstone">
+	android:fitsSystemWindows="true"
+	android:orientation="vertical">
 
-	<ImageView
-		android:id="@+id/listIconImageView"
-		android:layout_width="14dp"
-		android:layout_height="14dp"
-		android:layout_marginStart="20dp"
-		android:layout_marginTop="20dp"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:srcCompat="@drawable/ic_colist_list_icon" />
-
-	<EditText
-		android:id="@+id/createListEditText"
-		android:layout_width="wrap_content"
+	<LinearLayout
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="20dp"
-		android:ems="10"
-		android:hint="Create new list"
-		android:inputType="text"
-		android:minHeight="48dp"
-		app:layout_constraintStart_toEndOf="@+id/listIconImageView"
-		app:layout_constraintTop_toTopOf="parent" />
+		android:orientation="vertical">
 
-	<RadioGroup
-		android:layout_width="0dp"
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:baselineAligned="false"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:padding="20dp">
+
+			<ImageView
+				android:id="@+id/listIconImageView"
+				android:layout_width="14dp"
+				android:layout_height="14dp"
+				android:layout_marginEnd="16dp"
+				app:srcCompat="@drawable/ic_colist_list_icon" />
+
+			<EditText
+				android:id="@+id/createListEditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ems="10"
+				android:hint="Create new list"
+				android:inputType="text"
+				android:minHeight="48dp" />
+		</LinearLayout>
+
+		<RadioGroup
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:orientation="horizontal">
+
+			<RadioButton
+				android:id="@+id/radioButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+			<RadioButton
+				android:id="@+id/radioButton2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+			<RadioButton
+				android:id="@+id/radioButton3"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+			<RadioButton
+				android:id="@+id/radioButton4"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+			<RadioButton
+				android:id="@+id/radioButton5"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+			<RadioButton
+				android:id="@+id/radioButton6"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+		</RadioGroup>
+
+	</LinearLayout>
+
+	<androidx.appcompat.widget.AppCompatButton
+		android:id="@+id/dialogCreateListButton"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="20dp"
-		android:layout_marginTop="16dp"
-		android:layout_marginEnd="20dp"
-		android:layout_marginBottom="24dp"
-		android:gravity="center"
-		android:orientation="horizontal"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/createListEditText">
+		android:background="@drawable/colist_button"
+		android:insetTop="0dp"
+		android:insetBottom="0dp"
+		android:text="CREATE" />
 
-		<RadioButton
-			android:id="@+id/radioButton"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-
-		<RadioButton
-			android:id="@+id/radioButton2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-
-		<RadioButton
-			android:id="@+id/radioButton3"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-
-		<RadioButton
-			android:id="@+id/radioButton4"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-
-		<RadioButton
-			android:id="@+id/radioButton5"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-
-		<RadioButton
-			android:id="@+id/radioButton6"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-	</RadioGroup>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

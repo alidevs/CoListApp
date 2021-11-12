@@ -13,18 +13,18 @@ import retrofit2.Response
 class ListViewModel: ViewModel() {
 
 	companion object {
+		val apiEndpoints = ApiEndpoints.getInstance()
+		val xAuthHeader = Globals.sharedPreferences.getString("Token", "")!!
+
 		fun getLists(): MutableLiveData<List<ListModel>> {
 			val liveData = MutableLiveData<List<ListModel>>()
-			val apiEndpoints = ApiEndpoints.getInstance()
-			val xAuthHeader = Globals.sharedPreferences.getString("Token", "")!!
-
-			val call = apiEndpoints.getUserLists(xAuthHeader)
+			val call = apiEndpoints.getLists(xAuthHeader)
 
 			call.enqueue(object : Callback<List<ListModel>> {
 				override fun onResponse(call: Call<List<ListModel>>, response: Response<List<ListModel>>) {
 					if (response.isSuccessful) {
 						Log.d("ListViewModel", response.body().toString())
-						liveData.postValue(response.body())
+						liveData.value = response.body()
 					} else {
 						Log.d("Retrofit", response.code().toString())
 					}
@@ -35,6 +35,30 @@ class ListViewModel: ViewModel() {
 					t.printStackTrace()
 				}
 			})
+			return liveData
+		}
+
+		fun createList(listName: String, listIcon: Int) : MutableLiveData<ListModel> {
+			val liveData = MutableLiveData<ListModel>()
+			val listModel = ListModel(null, null, listName, listIcon, null, false)
+			val call = apiEndpoints.createList(xAuthHeader, listModel)
+
+			call.enqueue(object : Callback<ListModel> {
+				override fun onResponse(call: Call<ListModel>, response: Response<ListModel>) {
+					if (response.isSuccessful) {
+						Log.d("NJ", response.body().toString())
+						liveData.value = response.body()
+					} else {
+						Log.d("Retrofit", response.code().toString())
+					}
+				}
+
+				override fun onFailure(call: Call<ListModel>, t: Throwable) {
+					TODO("Not yet implemented")
+				}
+
+			})
+
 			return liveData
 		}
 	}

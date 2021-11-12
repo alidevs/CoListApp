@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:fab="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".activities.ListDetailsActivity">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/listAppBarLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/top_app_bar"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/listMaterialToolbar"
+			android:layout_width="match_parent"
+			android:layout_height="107dp"
+			app:menu="@menu/list_details_menu"
+			app:title="Shopping List" />
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/taskRecyclerView"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_marginTop="16dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/listAppBarLayout" />
+
+	<com.github.clans.fab.FloatingActionButton
+		android:id="@+id/fab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="20dp"
+		android:layout_marginBottom="20dp"
+		android:src="@drawable/ic_create_list_add_icon"
+		app:layout_constraintBottom_toBottomOf="@+id/taskRecyclerView"
+		app:layout_constraintEnd_toEndOf="@+id/taskRecyclerView"
+		fab:fab_colorNormal="@color/casal"
+		fab:fab_colorPressed="@color/cadet"
+		fab:fab_colorRipple="@color/bone" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

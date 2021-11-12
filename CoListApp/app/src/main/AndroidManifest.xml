@@ -13,6 +13,9 @@
 		android:theme="@style/Theme.CoListApp"
 		android:usesCleartextTraffic="true">
 		<activity
+			android:name=".activities.ListDetailsActivity"
+			android:exported="false" />
+		<activity
 			android:name=".activities.SplashActivity"
 			android:exported="true">
 			<intent-filter>
@@ -29,7 +32,8 @@
 			android:exported="true" />
 		<activity
 			android:name=".activities.HomeActivity"
-			android:exported="true" />
+			android:exported="true"
+			android:windowSoftInputMode="adjustResize" />
 	</application>
 
 </manifest>

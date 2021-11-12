@@ -39,14 +39,22 @@
 
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-	<Button
+	<androidx.appcompat.widget.AppCompatButton
 		android:id="@+id/createListButton"
 		style="@style/Widget.AppCompat.Button"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_height="44dp"
 		android:layout_marginBottom="20dp"
+		android:background="@drawable/colist_button"
+		android:textStyle="bold"
+		android:drawableStart="@drawable/ic_create_list_add_icon"
+		android:drawablePadding="10dp"
+		android:fontFamily="@font/gilroy_bold"
 		android:onClick="createNewListButtonPressed"
+		android:paddingLeft="20dp"
+		android:paddingRight="20dp"
 		android:text="Create New List"
+		android:textColor="@color/bone"
 		app:layout_constraintBottom_toBottomOf="@+id/homeSwipeContainer"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent" />
