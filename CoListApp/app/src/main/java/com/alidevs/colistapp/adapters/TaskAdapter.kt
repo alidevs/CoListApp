@@ -10,7 +10,7 @@ import com.alidevs.colistapp.models.TaskModel
 
 class TaskAdapter(private var data: ListModel) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
-	private lateinit var binding: TaskRecyclerRowBinding
+	private lateinit var binding: com.alidevs.colistapp.databinding.TaskRecyclerRowBinding
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 		val inflater = LayoutInflater.from(parent.context)
@@ -28,8 +28,8 @@ class TaskAdapter(private var data: ListModel) : RecyclerView.Adapter<TaskAdapte
 	inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 		fun bind(taskModel: TaskModel) {
 			with(binding) {
-				checkBox.text = taskModel.title
-				checkBox.isChecked = taskModel.completed
+				taskRowCheckbox.text = taskModel.title
+				taskRowCheckbox.isChecked = taskModel.completed
 			}
 		}
 	}

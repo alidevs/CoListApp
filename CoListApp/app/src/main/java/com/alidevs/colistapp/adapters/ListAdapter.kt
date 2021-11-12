@@ -33,6 +33,7 @@ class ListAdapter(private var data: List<ListModel>) :
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 		val list = data[position]
 		holder.bind(list)
+		holder.setIsRecyclable(false)
 
 		holder.itemView.setOnClickListener {
 			val gson = Gson()

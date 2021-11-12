@@ -24,7 +24,7 @@ class ListViewModel: ViewModel() {
 				override fun onResponse(call: Call<List<ListModel>>, response: Response<List<ListModel>>) {
 					if (response.isSuccessful) {
 						Log.d("ListViewModel", response.body().toString())
-						liveData.value = response.body()
+						liveData.postValue(response.body())
 					} else {
 						Log.d("Retrofit", response.code().toString())
 					}
@@ -46,7 +46,7 @@ class ListViewModel: ViewModel() {
 			call.enqueue(object : Callback<ListModel> {
 				override fun onResponse(call: Call<ListModel>, response: Response<ListModel>) {
 					if (response.isSuccessful) {
-						liveData.value = response.body()
+						liveData.postValue(response.body())
 					} else {
 						Log.d("Retrofit", response.code().toString())
 					}

@@ -2,6 +2,7 @@ package com.alidevs.colistapp.activities
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -29,6 +30,7 @@ class HomeActivity : AppCompatActivity() {
 			R.drawable.ic_list_shared_icon,
 			mutableListOf(),
 			false),
+		ListModel(null, null, "", R.drawable.ic_list_shared_icon, null, false)
 	)
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,20 +46,22 @@ class HomeActivity : AppCompatActivity() {
 		binding.homeRecyclerView.adapter = listAdapter
 		binding.materialToolbar.setTitleTextColor(Color.WHITE)
 
-		fetchData()
-
 		// Pull to refresh
-//		binding.homeSwipeContainer.setOnRefreshListener(swipeRefreshListener)
-//		binding.createListButton.setOnClickListener(createNewListButtonPressed)
+		binding.homeSwipeContainer.setOnRefreshListener { swipeRefreshListener }
+		binding.createListButton.setOnClickListener { createNewListButtonPressed() }
 	}
 
+	override fun onResume() {
+		super.onResume()
+		fetchData()
+	}
 
 	private val swipeRefreshListener: (View) -> Unit = {
-//		fetchData()
+		fetchData()
 		binding.homeSwipeContainer.isRefreshing = false
 	}
 
-	fun createNewListButtonPressed(view: View) {
+	private fun createNewListButtonPressed() {
 		val dialogBinding = CreateListDialogBinding.inflate(LayoutInflater.from(this))
 		val createListDialog = AlertDialog
 			.Builder(this, 0)
@@ -72,19 +76,19 @@ class HomeActivity : AppCompatActivity() {
 			createList.observe(this, {
 				retrievedLists.add(it)
 				updateLists()
-				listAdapter.notifyDataSetChanged()
 				createListDialog.dismiss()
 			})
 		}
 	}
 
 	private fun fetchData() {
+		binding.homeProgressBar.visibility = View.VISIBLE
 		val userLists = ListViewModel.getLists()
 		userLists.observe(this, {
 			retrievedLists.clear()
 			retrievedLists.addAll(it)
 			updateLists()
-			listAdapter.notifyDataSetChanged()
+			binding.homeProgressBar.visibility = View.INVISIBLE
 			binding.homeSwipeContainer.isRefreshing = false
 		})
 	}
@@ -92,6 +96,13 @@ class HomeActivity : AppCompatActivity() {
 	private fun updateLists() {
 		displayedList.clear()
 		displayedList.addAll(fixedLists)
+//		retrievedLists.sortBy { it.cr }
 		displayedList.addAll(retrievedLists)
+		listAdapter.notifyDataSetChanged()
+
+		displayedList.forEach { list ->
+			Log.d("ListOrder", "${list.name} -> ${list.tasks?.size}")
+		}
+		Log.d("ListOrder", "[${displayedList.size}]")
 	}
 }

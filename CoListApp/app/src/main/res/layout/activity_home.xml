@@ -40,22 +40,37 @@
 
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+	<com.google.android.material.progressindicator.CircularProgressIndicator
+		android:id="@+id/homeProgressBar"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:indeterminate="true"
+		android:visibility="visible"
+		app:indeterminateAnimationType="disjoint"
+		app:trackColor="@color/casal"
+		app:trackThickness="20dp"
+		app:indicatorColor="@color/soapstone"
+		app:showAnimationBehavior="inward"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
 	<androidx.appcompat.widget.AppCompatButton
 		android:id="@+id/createListButton"
 		style="@style/Widget.AppCompat.Button"
 		android:layout_width="wrap_content"
-		android:layout_height="44dp"
+		android:layout_height="48dp"
 		android:layout_marginBottom="20dp"
 		android:background="@drawable/colist_button"
-		android:textStyle="bold"
 		android:drawableStart="@drawable/ic_create_list_add_icon"
 		android:drawablePadding="10dp"
 		android:fontFamily="@font/gilroy_bold"
-		android:onClick="createNewListButtonPressed"
 		android:paddingLeft="20dp"
 		android:paddingRight="20dp"
 		android:text="Create New List"
 		android:textColor="@color/bone"
+		android:textStyle="bold"
 		app:layout_constraintBottom_toBottomOf="@+id/homeSwipeContainer"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent" />
