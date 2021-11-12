@@ -1,6 +1,7 @@
 package com.alidevs.colistapp.api
 
 import com.alidevs.colistapp.models.ListModel
+import com.alidevs.colistapp.models.TaskModel
 import com.alidevs.colistapp.models.UserModel
 import com.alidevs.colistapp.utils.Globals
 import retrofit2.Call
@@ -35,11 +36,16 @@ interface ApiEndpoints {
 	@GET("/users/me")
 	fun userMe() : Call<UserModel>
 
-	// List interaction routes
+	// Get all lists
 	@GET("/lists")
 	fun getLists(@Header("x-auth") xAuthHeader: String) : Call<List<ListModel>>
 
+	// Create new list
 	@POST("/lists")
 	fun createList(@Header("x-auth") xAuthHeader: String, @Body listModel: ListModel) : Call<ListModel>
+
+	// Add new task
+	@PATCH
+	fun createTask(@Url url: String, @Header("x-auth") xAuthHeader: String, @Body taskModel: TaskModel) : Call<ListModel>
 
 }

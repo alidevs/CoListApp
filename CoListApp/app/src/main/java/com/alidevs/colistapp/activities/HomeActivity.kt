@@ -1,5 +1,6 @@
 package com.alidevs.colistapp.activities
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,6 +42,7 @@ class HomeActivity : AppCompatActivity() {
 		binding.homeRecyclerView.layoutManager =
 			LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 		binding.homeRecyclerView.adapter = listAdapter
+		binding.materialToolbar.setTitleTextColor(Color.WHITE)
 
 		fetchData()
 
@@ -48,6 +50,7 @@ class HomeActivity : AppCompatActivity() {
 //		binding.homeSwipeContainer.setOnRefreshListener(swipeRefreshListener)
 //		binding.createListButton.setOnClickListener(createNewListButtonPressed)
 	}
+
 
 	private val swipeRefreshListener: (View) -> Unit = {
 //		fetchData()

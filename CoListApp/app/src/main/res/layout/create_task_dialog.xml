@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/soapstone"
+	android:padding="20dp">
+
+	<LinearLayout
+		android:id="@+id/linearLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<CheckBox
+			android:id="@+id/createTaskDialogCheckBox"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<EditText
+			android:id="@+id/createTaskDialogTaskNameEditText"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:ems="10"
+			android:hint="Create new task"
+			android:inputType="textPersonName"
+			android:minHeight="48dp"
+			android:textSize="16sp" />
+	</LinearLayout>
+
+	<EditText
+		android:id="@+id/createTaskDialogDescriptionEditText"
+		android:layout_width="0dp"
+		android:layout_height="150dp"
+		android:layout_marginTop="16dp"
+		android:ems="10"
+		android:fontFamily="@font/gilroy_mediumitalic"
+		android:gravity="start"
+		android:hint="Description"
+		android:inputType="textMultiLine"
+		android:minHeight="48dp"
+		android:textSize="14sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+	<LinearLayout
+		android:id="@+id/linearLayout2"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
+		android:orientation="horizontal"
+		app:layout_constraintBottom_toTopOf="@+id/dialogCreateTaskButton"
+		app:layout_constraintTop_toBottomOf="@+id/createTaskDialogDescriptionEditText"
+		app:layout_constraintVertical_bias="1.0"
+		tools:layout_editor_absoluteX="20dp">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:id="@+id/imageView4"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				app:srcCompat="@drawable/ic_colist_list_icon"
+				app:tint="@color/bright_maroon" />
+
+			<TextView
+				android:id="@+id/createTaskDialogListNameTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:fontFamily="@font/gilroy_semibold"
+				android:padding="10dp"
+				android:text="TextView"
+				android:textColor="@color/bright_maroon"
+				android:textStyle="bold" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:orientation="horizontal">
+
+			<ImageButton
+				android:id="@+id/createTaskDialogCalendarButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				app:srcCompat="@drawable/ic_calendar_icon"
+				app:tint="@color/boulder" />
+
+			<ImageButton
+				android:id="@+id/createTaskDialogTimeButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				app:srcCompat="@drawable/ic_time_icon"
+				app:tint="@color/boulder" />
+
+			<ImageButton
+				android:id="@+id/createTaskDialogNotesButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				app:srcCompat="@drawable/ic_notes_icon"
+				app:tint="@color/boulder" />
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<androidx.appcompat.widget.AppCompatButton
+		android:id="@+id/dialogCreateTaskButton"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/colist_button"
+		android:insetTop="0dp"
+		android:insetBottom="0dp"
+		android:text="CREATE"
+		app:layout_constraintBottom_toBottomOf="parent"
+		tools:layout_editor_absoluteX="20dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
