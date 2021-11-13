@@ -47,5 +47,39 @@
 		fab:fab_colorPressed="@color/cadet"
 		fab:fab_colorRipple="@color/bone" />
 
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/emptyStateLayout"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/listAppBarLayout">
+
+		<TextView
+			android:id="@+id/textView4"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:fontFamily="@font/gilroy_semibold"
+			android:text="You have no tasks in here."
+			android:textColor="@color/black"
+			android:textStyle="bold"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<ImageView
+			android:id="@+id/imageView5"
+			android:layout_width="300dp"
+			android:layout_height="200dp"
+			android:layout_marginTop="8dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/textView4"
+			app:srcCompat="@drawable/no_lists_empty_state_image" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,7 @@ interface ApiEndpoints {
 	fun userLogin(@Body user: UserModel) : Call<UserModel>
 
 	@GET("/users/me")
-	fun userMe() : Call<UserModel>
+	fun userMe() : Call<UserModel> // TODO: Authenticate user before application launch
 
 	// Get all lists
 	@GET("/lists")
@@ -47,5 +47,13 @@ interface ApiEndpoints {
 	// Add new task
 	@PATCH
 	fun createTask(@Url url: String, @Header("x-auth") xAuthHeader: String, @Body taskModel: TaskModel) : Call<ListModel>
+
+	// Update task
+	@PATCH
+	fun updateTask(@Url url: String, @Header("x-auth") xAuthHeader: String, @Body taskModel: TaskModel) : Call<TaskModel>
+
+	// Delete task
+	@DELETE
+	fun deleteTask(@Url url: String, @Header("x-auth") xAuthHeader: String) : Call<TaskModel>
 
 }

@@ -14,8 +14,8 @@ import retrofit2.Response
 class TaskViewModel: ViewModel() {
 
 	companion object {
-		val apiEndpoints = ApiEndpoints.getInstance()
-		val xAuthHeader = Globals.sharedPreferences.getString("Token", "")!!
+		private val apiEndpoints = ApiEndpoints.getInstance()
+		private val xAuthHeader = Globals.sharedPreferences.getString("Token", "")!!
 
 		fun createTask(task: TaskModel): MutableLiveData<ListModel> {
 			val url = ApiEndpoints.BASE_URL + "/lists/${task.listId}"
@@ -32,6 +32,53 @@ class TaskViewModel: ViewModel() {
 				}
 
 				override fun onFailure(call: Call<ListModel>, t: Throwable) {
+					t.message?.let { Log.d("Retrofit", it) }
+				}
+
+			})
+
+			return liveData
+		}
+
+		fun updateTask(task: TaskModel): MutableLiveData<TaskModel> {
+			val url = ApiEndpoints.BASE_URL + "/tasks/${task._id}"
+			val liveData = MutableLiveData<TaskModel>()
+			val call = apiEndpoints.updateTask(url, xAuthHeader, task)
+
+			call.enqueue(object : Callback<TaskModel> {
+				override fun onResponse(call: Call<TaskModel>, response: Response<TaskModel>) {
+					if (response.isSuccessful) {
+						liveData.postValue(response.body())
+					} else {
+						Log.d("Retrofit", task._id.toString())
+						Log.d("Retrofit", response.code().toString())
+					}
+				}
+
+				override fun onFailure(call: Call<TaskModel>, t: Throwable) {
+					t.message?.let { Log.d("Retrofit", it) }
+				}
+
+			})
+
+			return liveData
+		}
+
+		fun deleteTask(task: TaskModel): MutableLiveData<TaskModel> {
+			val url = ApiEndpoints.BASE_URL + "/tasks/${task._id}"
+			val liveData = MutableLiveData<TaskModel>()
+			val call = apiEndpoints.deleteTask(url, xAuthHeader)
+
+			call.enqueue(object : Callback<TaskModel> {
+				override fun onResponse(call: Call<TaskModel>, response: Response<TaskModel>) {
+					if (response.isSuccessful) {
+						liveData.postValue(response.body())
+					} else {
+						Log.d("Retrofit", response.code().toString())
+					}
+				}
+
+				override fun onFailure(call: Call<TaskModel>, t: Throwable) {
 					t.message?.let { Log.d("Retrofit", it) }
 				}
 

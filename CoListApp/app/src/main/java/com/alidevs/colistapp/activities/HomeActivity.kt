@@ -1,18 +1,24 @@
 package com.alidevs.colistapp.activities
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alidevs.colistapp.R
 import com.alidevs.colistapp.adapters.ListAdapter
 import com.alidevs.colistapp.databinding.ActivityHomeBinding
 import com.alidevs.colistapp.databinding.CreateListDialogBinding
 import com.alidevs.colistapp.models.ListModel
+import com.alidevs.colistapp.models.TaskModel
+import com.alidevs.colistapp.utils.Globals
 import com.alidevs.colistapp.viewmodel.ListViewModel
 
 class HomeActivity : AppCompatActivity() {
@@ -30,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
 			R.drawable.ic_list_shared_icon,
 			mutableListOf(),
 			false),
-		ListModel(null, null, "", R.drawable.ic_list_shared_icon, null, false)
+		ListModel(null, null, "", R.drawable.ic_list_shared_icon, null, false)  // Empty list to fix an issue where the separator takes a place instead of the first retrieved ListModel
 	)
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +44,8 @@ class HomeActivity : AppCompatActivity() {
 		binding = ActivityHomeBinding.inflate(layoutInflater)
 
 		setContentView(binding.root)
+
+		Globals.sharedPreferences = getSharedPreferences("CoList", Context.MODE_PRIVATE)
 
 		displayedList.addAll(fixedLists)
 		listAdapter = ListAdapter(displayedList)
@@ -47,7 +55,7 @@ class HomeActivity : AppCompatActivity() {
 		binding.materialToolbar.setTitleTextColor(Color.WHITE)
 
 		// Pull to refresh
-		binding.homeSwipeContainer.setOnRefreshListener { swipeRefreshListener }
+		binding.homeSwipeContainer.setOnRefreshListener { swipeRefreshListener() }
 		binding.createListButton.setOnClickListener { createNewListButtonPressed() }
 	}
 
@@ -56,9 +64,8 @@ class HomeActivity : AppCompatActivity() {
 		fetchData()
 	}
 
-	private val swipeRefreshListener: (View) -> Unit = {
+	private fun swipeRefreshListener() {
 		fetchData()
-		binding.homeSwipeContainer.isRefreshing = false
 	}
 
 	private fun createNewListButtonPressed() {
@@ -70,6 +77,7 @@ class HomeActivity : AppCompatActivity() {
 		createListDialog.setView(dialogBinding.root)
 		createListDialog.show()
 
+		createListDialog.window?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.dialog_shape))
 		dialogBinding.dialogCreateListButton.setOnClickListener {
 			val listName = dialogBinding.createListEditText.text.toString()
 			val createList = ListViewModel.createList(listName, R.drawable.ic_list_inbox_icon)
@@ -84,25 +92,44 @@ class HomeActivity : AppCompatActivity() {
 	private fun fetchData() {
 		binding.homeProgressBar.visibility = View.VISIBLE
 		val userLists = ListViewModel.getLists()
-		userLists.observe(this, {
+		userLists.observeForever {
+			Log.d("UserLists update", "New data found")
 			retrievedLists.clear()
 			retrievedLists.addAll(it)
 			updateLists()
-			binding.homeProgressBar.visibility = View.INVISIBLE
-			binding.homeSwipeContainer.isRefreshing = false
-		})
+		}
 	}
 
 	private fun updateLists() {
-		displayedList.clear()
-		displayedList.addAll(fixedLists)
-//		retrievedLists.sortBy { it.cr }
-		displayedList.addAll(retrievedLists)
-		listAdapter.notifyDataSetChanged()
+		val inboxList = fixedLists[0]
 
-		displayedList.forEach { list ->
-			Log.d("ListOrder", "${list.name} -> ${list.tasks?.size}")
+		// Clear lists
+		displayedList.clear()
+		inboxList.tasks!!.clear()
+
+		// Sort & filter lists
+		retrievedLists.sortByDescending { it.updatedAt }
+		retrievedLists.forEach { list ->
+			val incompleteTasks = list.tasks!!.filter { task -> !task.completed }
+			inboxList.tasks!!.addAll(incompleteTasks)
 		}
-		Log.d("ListOrder", "[${displayedList.size}]")
+
+		// Merge lists
+		displayedList.addAll(fixedLists)
+		displayedList.addAll(retrievedLists)
+
+		// Show & hide views
+		with(binding) {
+			homeProgressBar.visibility = View.INVISIBLE
+			homeSwipeContainer.isRefreshing = false
+			if (retrievedLists.size > 0) {
+				emptyStateLayout.visibility = View.INVISIBLE
+				homeRecyclerView.visibility = View.VISIBLE
+			} else {
+				emptyStateLayout.visibility = View.VISIBLE
+				homeRecyclerView.visibility = View.INVISIBLE
+			}
+		}
+		listAdapter.notifyDataSetChanged()
 	}
 }

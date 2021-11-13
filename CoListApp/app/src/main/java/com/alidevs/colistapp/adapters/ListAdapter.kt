@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.alidevs.colistapp.R
@@ -13,6 +12,7 @@ import com.alidevs.colistapp.activities.ListDetailsActivity
 import com.alidevs.colistapp.databinding.HomeRecyclerRowBinding
 import com.alidevs.colistapp.models.ListModel
 import com.google.gson.Gson
+
 
 class ListAdapter(private var data: List<ListModel>) :
 	RecyclerView.Adapter<ListAdapter.ViewHolder>() {
@@ -60,7 +60,6 @@ class ListAdapter(private var data: List<ListModel>) :
 				listRowCountTextView.text = listModel.tasks?.count().toString()
 				listRowIconImageView.setImageDrawable(ContextCompat.getDrawable(root.context,
 					listModel.icon))
-				Log.d("ListAdapter drawable", R.drawable.ic_list_today_icon.toString())
 			}
 		}
 	}

@@ -1,7 +1,6 @@
 package com.alidevs.colistapp.models
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 data class ListModel(
 	@SerializedName("_id")
@@ -17,8 +16,14 @@ data class ListModel(
 	var icon: Int,
 
 	@SerializedName("tasks")
-	var tasks: List<TaskModel>?,
+	var tasks: MutableList<TaskModel>?,
 
 	@SerializedName("shared")
 	var shared: Boolean,
+
+	@SerializedName("createdAt")
+	var createdAt: String? = null,
+
+	@SerializedName("updatedAt")
+	var updatedAt: String? = null
 )
