@@ -14,7 +14,7 @@
 		android:theme="@style/Theme.CoListApp"
 		android:usesCleartextTraffic="true">
 		<activity
-			android:name=".activities.TaskUpdateActivity"
+			android:name=".activities.TaskDetailsActivity"
 			android:exported="false" />
 		<activity
 			android:name=".activities.ListDetailsActivity"

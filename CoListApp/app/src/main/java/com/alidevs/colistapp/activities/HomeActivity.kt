@@ -1,13 +1,11 @@
 package com.alidevs.colistapp.activities
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,7 +15,6 @@ import com.alidevs.colistapp.adapters.ListAdapter
 import com.alidevs.colistapp.databinding.ActivityHomeBinding
 import com.alidevs.colistapp.databinding.CreateListDialogBinding
 import com.alidevs.colistapp.models.ListModel
-import com.alidevs.colistapp.models.TaskModel
 import com.alidevs.colistapp.utils.Globals
 import com.alidevs.colistapp.viewmodel.ListViewModel
 
@@ -36,7 +33,12 @@ class HomeActivity : AppCompatActivity() {
 			R.drawable.ic_list_shared_icon,
 			mutableListOf(),
 			false),
-		ListModel(null, null, "", R.drawable.ic_list_shared_icon, null, false)  // Empty list to fix an issue where the separator takes a place instead of the first retrieved ListModel
+		ListModel(null,
+			null,
+			"",
+			R.drawable.ic_list_shared_icon,
+			null,
+			false)  // Empty list to fix an issue where the separator takes a place instead of the first retrieved ListModel
 	)
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +79,8 @@ class HomeActivity : AppCompatActivity() {
 		createListDialog.setView(dialogBinding.root)
 		createListDialog.show()
 
-		createListDialog.window?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.dialog_shape))
+		createListDialog.window?.setBackgroundDrawable(ContextCompat.getDrawable(this,
+			R.drawable.dialog_shape))
 		dialogBinding.dialogCreateListButton.setOnClickListener {
 			val listName = dialogBinding.createListEditText.text.toString()
 			val createList = ListViewModel.createList(listName, R.drawable.ic_list_inbox_icon)
@@ -130,6 +133,7 @@ class HomeActivity : AppCompatActivity() {
 				homeRecyclerView.visibility = View.INVISIBLE
 			}
 		}
+
 		listAdapter.notifyDataSetChanged()
 	}
 }

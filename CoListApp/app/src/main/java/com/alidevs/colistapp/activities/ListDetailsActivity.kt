@@ -3,11 +3,9 @@ package com.alidevs.colistapp.activities
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.graphics.Color
-import android.graphics.ColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.SimpleAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -83,7 +81,8 @@ class ListDetailsActivity : AppCompatActivity() {
 						val datePickerDialog =
 							DatePickerDialog(this@ListDetailsActivity, { view, y, m, d ->
 								newTask.dueDate = "$y/${m + 1}/$d"
-								createTaskDialogBinding.createTaskDialogCalendarTextView.setTextColor(brightMaroonColor)
+								createTaskDialogBinding.createTaskDialogCalendarTextView.setTextColor(
+									brightMaroonColor)
 								createTaskDialogBinding.createTaskDialogCalendarTextView.text =
 									newTask.dueDate.toString()
 								Toast.makeText(this@ListDetailsActivity,
@@ -104,7 +103,7 @@ class ListDetailsActivity : AppCompatActivity() {
 						val minutes = calendar.get(Calendar.MINUTE)
 
 						val timePickerDialog = TimePickerDialog(this@ListDetailsActivity,
-							{ view, h, m ->
+							{ _, h, m ->
 								newTask.reminder = "$h:$m"
 								createTaskDialogBinding.createTaskDialogTimeTextView.text =
 									newTask.reminder.toString()
@@ -144,7 +143,9 @@ class ListDetailsActivity : AppCompatActivity() {
 				val deletedTask = list.tasks?.get(pos)!!
 				val deleteTask = TaskViewModel.deleteTask(deletedTask)
 				deleteTask.observe(this@ListDetailsActivity, {
-					Toast.makeText(this@ListDetailsActivity, "Task ${it.title} has been removed", Toast.LENGTH_SHORT).show()
+					Toast.makeText(this@ListDetailsActivity,
+						"Task ${it.title} has been removed",
+						Toast.LENGTH_SHORT).show()
 					list.tasks!!.remove(deletedTask)
 					taskAdapter.notifyDataSetChanged()
 				})
@@ -155,6 +156,13 @@ class ListDetailsActivity : AppCompatActivity() {
 		itemTouchHelper.attachToRecyclerView(binding.taskRecyclerView)
 	}
 
+	override fun onResume() {
+		super.onResume()
+		Toast.makeText(this, "Activity resumed", Toast.LENGTH_SHORT).show()
+	}
+
+	fun fetchData() {
+	}
 
 	private fun toggleEmptyState() {
 		// Show & hide views

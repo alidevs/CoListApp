@@ -32,7 +32,7 @@ class SplashActivity : AppCompatActivity() {
 
 		if (Globals.sharedPreferences.getBoolean("first_timer", true)) {
 			// TODO: Move the segue to login here
-			Toast.makeText(this, "This is your first time using the app, welcome :)", Toast.LENGTH_SHORT).show()
+//			Toast.makeText(this, "This is your first time using the app, welcome :)", Toast.LENGTH_SHORT).show()
 			Log.d("Comments", "First time")
 
 			Globals.sharedPreferences.edit().putBoolean("first_timer", false).apply()
@@ -43,10 +43,14 @@ class SplashActivity : AppCompatActivity() {
 			if (Globals.sharedPreferences.getString("Email", null) == null) {
 				intent = Intent(this, LoginActivity::class.java)
 			}
-			Toast.makeText(this, "Welcome back, ${Globals.sharedPreferences.getString("Fullname", "N/A")}", Toast.LENGTH_SHORT).show()
+
+			val fullname = Globals.sharedPreferences.getString("Fullname", "")
+			if (!fullname.isNullOrBlank()) {
+				Toast.makeText(this, "Welcome back, $fullname!", Toast.LENGTH_SHORT).show()
+			}
 			startActivity(intent)
 			finish()
-		}, 1500)
+		}, 2500)
 
 	}
 }

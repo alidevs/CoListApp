@@ -3,7 +3,7 @@
 	<style name="Theme.CoListApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 		<!-- Primary brand color. -->
 		<item name="colorPrimary">@color/black</item>
-		<item name="colorPrimaryVariant">@color/bone</item>
+		<item name="colorPrimaryVariant">@color/casal</item>
 		<item name="colorOnPrimary">@color/white</item>
 		<!-- Secondary brand color. -->
 		<item name="colorSecondary">@color/casal</item>

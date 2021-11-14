@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.alidevs.colistapp.databinding.ActivityLoginBinding
 import com.alidevs.colistapp.models.UserModel
-import com.alidevs.colistapp.utils.AuthenticationViewModel
+import com.alidevs.colistapp.viewmodel.AuthenticationViewModel
 
 class LoginActivity : AppCompatActivity() {
 

@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alidevs.colistapp.databinding.ActivityRegisterBinding
 import com.alidevs.colistapp.models.UserModel
-import com.alidevs.colistapp.utils.AuthenticationViewModel
+import com.alidevs.colistapp.viewmodel.AuthenticationViewModel
 
 class RegisterActivity : AppCompatActivity() {
 
